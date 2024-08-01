@@ -1,7 +1,21 @@
-
-export const $http = async (data) => {
+export const $http = async ({ data = {}, packageName = '' }) => {
+    const result = Object.entries(data).reduce((current, pre) => {
+        current = [...current, { Name: pre.at(0), value: pre.at(-1) }]
+        return current
+    }, [])
+    const staticJSON = {
+        "Initiator": {
+            "InitiatorDisplayName": "workflow",
+            "InitiatorName": "Workflow"
+        },
+        "InstanceCreationFlags": 0,
+        "Origin": "string content",
+        "Originator": "string content",
+        "Parametercollection": result,
+        "WorkflowName": packageName
+    }
     const options = {
-        body: JSON.stringify(data || {}),
+        body: JSON.stringify(staticJSON),
         headers: {
             'Content-Type': 'application/json'
         },
