@@ -38,23 +38,7 @@
 </template>
 
 <script>
-const data = {
-  "Initiator": {
-    "InitiatorDisplayName": "workflow",
-    "InitiatorName": "Workflow"
-  },
-  "InstanceCreationFlags": 0,
-  "Origin": "string content",
-  "Originator": "string content",
-  "Parametercollection": [
-    {
-      "Name": "Company Name",
-      "value": "Ricoh HK"
-    }
-  ],
-  "WorkflowName": "Workflow 1"
-}
-
+import { $http } from "@/http"
 export default {
   name: "UpdatePriority",
   data: () => ({
@@ -80,7 +64,16 @@ export default {
     loading: false,
   }),
   async created() {
-    
+   const tag =  await $http({
+      data: [
+        {
+          "Name": "Company Name",
+          "value": "Ricoh HK"
+        }
+      ],
+      packageName: 'Workflow 1'
+   })
+    console.log(tag);
   },
   methods: {
     handleSubmit() {
