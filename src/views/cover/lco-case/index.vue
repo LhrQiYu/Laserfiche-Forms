@@ -7,14 +7,8 @@
       <el-card class="add-card">
         <div class="baseinfo-container">
           <div class="baseinfo-card">
-            <el-form
-              style="font-weight: 700"
-              :model="ruleForm"
-              :rules="rules"
-              ref="ruleForm"
-              class="baseinfo-form"
-              label-width="140px"
-            >
+            <el-form style="font-weight: 700" :model="ruleForm" :rules="rules" ref="ruleForm" class="baseinfo-form"
+              label-width="140px">
               <el-form-item label="活动性质" prop="type">
                 <el-checkbox-group v-model="ruleForm.type">
                   <el-checkbox label="Coversheet" />
@@ -22,42 +16,21 @@
                 </el-checkbox-group>
               </el-form-item>
               <el-form-item label="Case Name:" prop="caseName">
-                <el-input
-                  size="small"
-                  maxlength="50"
-                  placeholder="请输入"
-                  auto-complete="off"
-                  v-model="ruleForm.caseName"
-                />
+                <el-input size="small" maxlength="50" placeholder="请输入" auto-complete="off"
+                  v-model="ruleForm.caseName" />
               </el-form-item>
               <el-form-item label="Case Number:" prop="caseNumber">
-                <el-input
-                  size="small"
-                  maxlength="50"
-                  placeholder="请输入"
-                  auto-complete="off"
-                  v-model="ruleForm.caseNumber"
-                />
+                <el-input size="small" maxlength="50" placeholder="请输入" auto-complete="off"
+                  v-model="ruleForm.caseNumber" />
               </el-form-item>
               <el-form-item label="Case Number:">
-                <el-input
-                  size="small"
-                  maxlength="50"
-                  placeholder="请输入"
-                  auto-complete="off"
-                  v-model="ruleForm.lcoDesc"
-                />
+                <el-input size="small" maxlength="50" placeholder="请输入" auto-complete="off"
+                  v-model="ruleForm.lcoDesc" />
               </el-form-item>
             </el-form>
           </div>
-          <el-button
-            class="submit-btn"
-            size="small"
-            type="primary"
-            :loading="loading"
-            @click="handleSubmit"
-            >提交</el-button
-          >
+          <el-button class="submit-btn" size="small" type="primary" :loading="loading"
+            @click="handleSubmit">提交</el-button>
         </div>
       </el-card>
     </div>
@@ -65,6 +38,23 @@
 </template>
 
 <script>
+const data = {
+  "Initiator": {
+    "InitiatorDisplayName": "workflow",
+    "InitiatorName": "Workflow"
+  },
+  "InstanceCreationFlags": 0,
+  "Origin": "string content",
+  "Originator": "string content",
+  "Parametercollection": [
+    {
+      "Name": "Company Name",
+      "value": "Ricoh HK"
+    }
+  ],
+  "WorkflowName": "Workflow 1"
+}
+
 export default {
   name: "UpdatePriority",
   data: () => ({
@@ -89,6 +79,9 @@ export default {
     },
     loading: false,
   }),
+  async created() {
+    
+  },
   methods: {
     handleSubmit() {
       this.$refs["ruleForm"].validate(async (valid) => {
@@ -120,7 +113,8 @@ export default {
     width: 420px;
   }
 }
-.el-checkbox-group{
+
+.el-checkbox-group {
   display: flex;
   flex-flow: column;
 }
