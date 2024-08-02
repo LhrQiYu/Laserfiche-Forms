@@ -1,31 +1,14 @@
 <template>
   <div class="main">
     <el-card>
-      <span style="font-weight: 700; font-size: 18px"
-        >Draft acknowledgement email</span
-      >
+      <span style="font-weight: 700; font-size: 18px">Draft acknowledgement email</span>
     </el-card>
     <div class="add-content">
       <el-card class="add-card">
         <div class="baseinfo-container">
           <div class="baseinfo-card">
-            <el-form
-              :model="formData"
-              :rules="rules"
-              class="baseinfo-form"
-              label-width="220px"
-            >
-              <h2
-                style="
-                  width: calc(90vw - 20px);
-                  margin-bottom: 10px;
-                  border-bottom: 1px dashed #ccc;
-                  padding-bottom: 10px;
-                  font-size: 18px;
-                "
-              >
-                LCO Case Registration Form
-              </h2>
+            <el-form ref="formDataRef" :model="formData" :rules="rules" class="baseinfo-form" label-width="220px">
+              <h2 style="width: calc(90vw - 20px); margin-bottom: 10px; border-bottom: 1px dashed #ccc; padding-bottom: 10px; font-size: 18px">LCO Case Registration Form</h2>
 
               <el-form-item label="workflow email id">
                 <el-input size="small" v-model="formData.workflowEmailId" />
@@ -56,17 +39,7 @@
                 <el-input size="small" v-model="formData.departmentCode" />
               </el-form-item>
 
-              <h2
-                style="
-                  width: calc(90vw - 20px);
-                  margin: 40px 0 10px 0;
-                  border-bottom: 1px dashed #ccc;
-                  padding-bottom: 10px;
-                  font-size: 18px;
-                "
-              >
-                Trademark
-              </h2>
+              <h2 style="width: calc(90vw - 20px); margin: 40px 0 10px 0; border-bottom: 1px dashed #ccc; padding-bottom: 10px; font-size: 18px">Trademark</h2>
 
               <el-form-item label="Self-created Instructing Department?">
                 <el-radio-group v-model="formData.radio">
@@ -85,12 +58,8 @@
 
               <el-form-item label="Trademark Master Case or Sub Case">
                 <el-radio-group v-model="formData.subCase">
-                  <el-radio
-                    label="Register a new Trademark Master Case"
-                  ></el-radio>
-                  <el-radio
-                    label="Register a new sub-case under a current Trademark Master Case"
-                  ></el-radio>
+                  <el-radio label="Register a new Trademark Master Case"></el-radio>
+                  <el-radio label="Register a new sub-case under a current Trademark Master Case"></el-radio>
                 </el-radio-group>
               </el-form-item>
 
@@ -106,42 +75,20 @@
                 <el-input size="small" v-model="formData.caseDescription" />
               </el-form-item>
 
-              <el-form-item
-                label="Instructing Staff Name"
-                prop="instructingName"
-              >
+              <el-form-item label="Instructing Staff Name" prop="instructingName">
                 <el-input size="small" v-model="formData.instructingName" />
               </el-form-item>
 
-              <el-form-item
-                label="Instructing Staff Email"
-                prop="instructingEmail"
-              >
+              <el-form-item label="Instructing Staff Email" prop="instructingEmail">
                 <el-input size="small" v-model="formData.instructingEmail" />
               </el-form-item>
 
-              <h2
-                style="
-                  width: calc(90vw - 20px);
-                  margin: 40px 0 10px 0;
-                  border-bottom: 1px dashed #ccc;
-                  padding-bottom: 10px;
-                  font-size: 18px;
-                "
-              >
-                Self-created Instructing Department
-              </h2>
+              <h2 style="width: calc(90vw - 20px); margin: 40px 0 10px 0; border-bottom: 1px dashed #ccc; padding-bottom: 10px; font-size: 18px">Self-created Instructing Department</h2>
 
-              <el-form-item
-                label="New or Existing Self-created Instructing Department"
-              >
+              <el-form-item label="New or Existing Self-created Instructing Department">
                 <el-radio-group v-model="formData.selfInstructing">
-                  <el-radio
-                    label="Create a new Instructing Department"
-                  ></el-radio>
-                  <el-radio
-                    label="Select a self-created Instructing Department"
-                  ></el-radio>
+                  <el-radio label="Create a new Instructing Department"></el-radio>
+                  <el-radio label="Select a self-created Instructing Department"></el-radio>
                 </el-radio-group>
               </el-form-item>
 
@@ -149,21 +96,15 @@
                 <el-input size="small" v-model="formData.createInstryting" />
               </el-form-item>
 
-              <el-form-item
-                label="New Self-created Instructing Department Code"
-              >
+              <el-form-item label="New Self-created Instructing Department Code">
                 <el-input size="small" v-model="formData.createInstryingCode" />
               </el-form-item>
 
-              <el-form-item
-                label="Existing Self-created Instructing Department Code"
-              >
+              <el-form-item label="Existing Self-created Instructing Department Code">
                 <el-input size="small" v-model="formData.existingCode" />
               </el-form-item>
 
-              <el-form-item
-                label="Existing Self-created Instructing Department"
-              >
+              <el-form-item label="Existing Self-created Instructing Department">
                 <el-input size="small" v-model="formData.existingDepartment" />
               </el-form-item>
 
@@ -180,28 +121,10 @@
               </el-form-item>
 
               <el-form-item label="Descriptions">
-                <el-input
-                  size="small"
-                  v-model="formData.descriptions"
-                  :rows="3"
-                  type="textarea"
-                  minlength="50"
-                  maxlength="200"
-                  show-word-limit
-                />
+                <el-input size="small" v-model="formData.descriptions" :rows="3" type="textarea" minlength="50" maxlength="200" show-word-limit />
               </el-form-item>
 
-              <h2
-                style="
-                  width: calc(90vw - 20px);
-                  margin: 40px 0 10px 0;
-                  border-bottom: 1px dashed #ccc;
-                  padding-bottom: 10px;
-                  font-size: 18px;
-                "
-              >
-                Related Case(s)
-              </h2>
+              <h2 style="width: calc(90vw - 20px); margin: 40px 0 10px 0; border-bottom: 1px dashed #ccc; padding-bottom: 10px; font-size: 18px">Related Case(s)</h2>
 
               <el-form-item label="Related Case Name">
                 <el-input size="small" v-model="formData.relatedName" />
@@ -211,30 +134,14 @@
                 <el-input size="small" v-model="formData.relatedNumber" />
               </el-form-item>
 
-              <h2
-                style="
-                  width: calc(90vw - 20px);
-                  margin: 40px 0 10px 0;
-                  border-bottom: 1px dashed #ccc;
-                  padding-bottom: 10px;
-                  font-size: 18px;
-                "
-              >
-                Keywords(s)
-              </h2>
+              <h2 style="width: calc(90vw - 20px); margin: 40px 0 10px 0; border-bottom: 1px dashed #ccc; padding-bottom: 10px; font-size: 18px">Keywords(s)</h2>
 
               <el-form-item label="Keywords">
                 <el-input size="small" v-model="formData.keywords" />
               </el-form-item>
 
               <el-form-item label="File Upload:">
-                <el-upload
-                  class="upload-demo"
-                  :limit="3"
-                  action=""
-                  :auto-upload="false"
-                  :file-list="formData.fileList"
-                >
+                <el-upload class="upload-demo" :limit="3" action="" :auto-upload="false" :file-list="formData.fileList">
                   <el-button size="small" type="primary">Upload</el-button>
                 </el-upload>
               </el-form-item>
@@ -243,15 +150,8 @@
                 <el-input size="small" v-model="formData.emailSubject" />
               </el-form-item>
 
-              <el-form-item
-                label="Email Preview"
-                class="quill-conatiner"
-                style="margin-top: 20px"
-              >
-                <quill
-                  :content="formData.content"
-                  @quillEditorChange="quillEditorChange"
-                />
+              <el-form-item label="Email Preview" class="quill-conatiner" style="margin-top: 20px">
+                <quill :content="formData.content" @quillEditorChange="quillEditorChange" />
               </el-form-item>
 
               <!-- <el-form-item label="Please insert c.c. email address(es)">
@@ -259,35 +159,12 @@
               </el-form-item> -->
 
               <el-form-item label="Email Options" prop="emailOptions">
-                <el-select
-                  v-model="formData.emailOptions"
-                  size="small"
-                  filterable
-                  clearable
-                  style="width: 100%"
-                  placeholder="请选择"
-                >
-                  <el-option
-                    v-for="item in courseClassifyListCopy"
-                    :key="item.id"
-                    :label="item.name"
-                    :value="item.id"
-                  >
-                  </el-option>
+                <el-select v-model="formData.emailOptions" size="small" filterable clearable style="width: 100%" placeholder="请选择">
+                  <el-option v-for="item in courseClassifyListCopy" :key="item.id" :label="item.name" :value="item.id"></el-option>
                 </el-select>
               </el-form-item>
 
-              <h2
-                style="
-                  width: calc(90vw - 20px);
-                  margin: 40px 0 10px 0;
-                  border-bottom: 1px dashed #ccc;
-                  padding-bottom: 10px;
-                  font-size: 18px;
-                "
-              >
-                Hidden Section
-              </h2>
+              <h2 style="width: calc(90vw - 20px); margin: 40px 0 10px 0; border-bottom: 1px dashed #ccc; padding-bottom: 10px; font-size: 18px">Hidden Section</h2>
 
               <el-form-item label="Case Type_Hidden" prop="caseHidden">
                 <el-input size="small" v-model="formData.caseHidden" />
@@ -301,36 +178,20 @@
                 <el-input size="small" v-model="formData.instructingNormal" />
               </el-form-item>
 
-              <el-form-item
-                label="Instructing Department Type SelfCreate Hidden"
-              >
-                <el-input
-                  size="small"
-                  v-model="formData.instructingSelfCreate"
-                />
+              <el-form-item label="Instructing Department Type SelfCreate Hidden">
+                <el-input size="small" v-model="formData.instructingSelfCreate" />
               </el-form-item>
 
-              <el-form-item
-                label="Instructing Department Type SelfCreate Hidden"
-              >
+              <el-form-item label="Instructing Department Type SelfCreate Hidden">
                 <el-input size="small" v-model="formData.instructingType" />
               </el-form-item>
 
               <el-form-item label="Self-created Instructing Department">
-                <el-checkbox
-                  >Register a Case with Self-created Instructing
-                  Department</el-checkbox
-                >
+                <el-checkbox>Register a Case with Self-created Instructing Department</el-checkbox>
               </el-form-item>
 
               <el-form-item>
-                <el-button
-                  class="submit-btn"
-                  size="small"
-                  type="primary"
-                  @submit="handleSubmit"
-                  >提交</el-button
-                >
+                <el-button class="submit-btn" size="small" type="primary" @click="handleSubmit" :loading="loading">提交</el-button>
               </el-form-item>
             </el-form>
           </div>
@@ -343,12 +204,14 @@
 
 <script>
 import Quill from '../components/Quill'
+import { $http } from '@/http'
 
 const courseClassifyListCopy = [
   { id: 1, name: 'To be sent by system' },
   { id: 2, name: 'To be sent manually' },
   { id: 3, name: 'Not required' },
 ]
+const loading = false
 
 export default {
   name: 'ProductList',
@@ -356,47 +219,60 @@ export default {
   data() {
     return {
       courseClassifyListCopy,
+      loading,
       formData: {
-        content: '',
+        content: null,
         status: null,
-        fileList: []
+        fileList: [],
       },
       rules: {
-        caseName: [
-          { required: true, message: '值是必需的。', trigger: 'blur' },
-        ],
-        caseHidden: [
-          { required: true, message: '值是必需的。', trigger: 'blur' },
-        ],
-        caseDisplay: [
-          { required: true, message: '值是必需的。', trigger: 'blur' },
-        ],
-        instructingName: [
-          { required: true, message: '值是必需的。', trigger: 'blur' },
-        ],
-        instructingEmail: [
-          { required: true, message: '值是必需的。', trigger: 'blur' },
-        ],
-        lcoStaff: [
-          { required: true, message: '值是必需的。', trigger: 'blur' },
-        ],
-        instructingName: [
-          { required: true, message: '值是必需的。', trigger: 'blur' },
-        ],
+        caseName: [{ required: true, message: '值是必需的。', trigger: 'blur' }],
+        caseHidden: [{ required: true, message: '值是必需的。', trigger: 'blur' }],
+        caseDisplay: [{ required: true, message: '值是必需的。', trigger: 'blur' }],
+        instructingName: [{ required: true, message: '值是必需的。', trigger: 'blur' }],
+        instructingEmail: [{ required: true, message: '值是必需的。', trigger: 'blur' }],
+        lcoStaff: [{ required: true, message: '值是必需的。', trigger: 'blur' }],
+        instructingName: [{ required: true, message: '值是必需的。', trigger: 'blur' }],
 
         status: [{ required: true, message: '请选择', trigger: 'change' }],
-        emailOptions: [
-          { required: true, message: '请选择', trigger: 'change' },
-        ],
+        emailOptions: [{ required: true, message: '请选择', trigger: 'change' }],
       },
     }
   },
   mounted() {},
   methods: {
-    quillEditorChange(val) {
-      console.log('val', val)
+    quillEditorChange(data) {
+      this.formData.content = data.html
     },
-    handleSubmit() {},
+    handleSubmit() {
+      // this.$refs.formDataRef.validate
+      // this.$refs.formDataRef.validate(valid =>
+      this.$refs.formDataRef.validate(async valid => {
+        if (valid) {
+          this.loading = true
+          const params = {
+            data: this.formData,
+            packageName: 'Workflow 9',
+          }
+          const res = await $http(params)
+          if (res) {
+            this.loading = false
+            this.$message.success('提交成功')
+            this.resetForm()
+          }
+        }
+      })
+    },
+    resetForm() {
+      this.$refs.formDataRef.resetFields()
+      this.formData = {
+        name: '',
+        instructingName: '',
+        status: '',
+        emailOptions: '',
+        content: '',
+      }
+    },
   },
 }
 </script>

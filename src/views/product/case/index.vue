@@ -1,32 +1,14 @@
 <template>
   <div class="main">
     <el-card>
-      <span style="font-weight: 700; font-size: 18px"
-        >EO Update Case Status</span
-      >
+      <span style="font-weight: 700; font-size: 18px">EO Update Case Status</span>
     </el-card>
     <div class="add-content">
       <el-card class="add-card">
         <div class="baseinfo-container">
           <div class="baseinfo-card">
-            <el-form
-              :model="formData"
-              :rules="rules"
-              style="font-weight: 700"
-              class="baseinfo-form"
-              label-width="320px"
-            >
-              <h2
-                style="
-                  width: calc(90vw - 20px);
-                  margin-bottom: 10px;
-                  border-bottom: 1px dashed #ccc;
-                  padding-bottom: 10px;
-                  font-size: 18px;
-                "
-              >
-                LCO Case Registration Form
-              </h2>
+            <el-form ref="formDataRef" :model="formData" :rules="rules" style="font-weight: 700" class="baseinfo-form" label-width="320px">
+              <h2 style="width: calc(90vw - 20px); margin-bottom: 10px; border-bottom: 1px dashed #ccc; padding-bottom: 10px; font-size: 18px">LCO Case Registration Form</h2>
               <el-form-item label="workflow email id">
                 <el-input size="small" v-model="formData.workflowEmailId" />
               </el-form-item>
@@ -45,7 +27,7 @@
               </el-form-item>
 
               <el-form-item label="Trademark Case">
-                <el-input size="small" />
+                <el-input size="small" v-model="formData.trademarkCase" />
               </el-form-item>
 
               <el-form-item label="Instructing Department">
@@ -71,26 +53,12 @@
                 <el-input size="small" v-model="formData.deptCode" />
               </el-form-item>
 
-              <h2
-                style="
-                  width: calc(90vw - 20px);
-                  margin: 40px 0 10px 0;
-                  border-bottom: 1px dashed #ccc;
-                  padding-bottom: 10px;
-                  font-size: 18px;
-                "
-              >
-                Trademark
-              </h2>
+              <h2 style="width: calc(90vw - 20px); margin: 40px 0 10px 0; border-bottom: 1px dashed #ccc; padding-bottom: 10px; font-size: 18px">Trademark</h2>
 
               <el-form-item label="Trademark Master Case or Sub Case">
                 <el-radio-group v-model="formData.subCase">
-                  <el-radio
-                    label="Register a new Trademark Master Case"
-                  ></el-radio>
-                  <el-radio
-                    label="Register a new sub-case under a current Trademark Master Case"
-                  ></el-radio>
+                  <el-radio label="Register a new Trademark Master Case"></el-radio>
+                  <el-radio label="Register a new sub-case under a current Trademark Master Case"></el-radio>
                 </el-radio-group>
               </el-form-item>
 
@@ -103,67 +71,39 @@
               </el-form-item>
 
               <el-form-item label="Trademark Sub Case Description">
-                <el-input size="small" />
+                <el-input size="small" v-model="formData.caseDescription" />
               </el-form-item>
 
-              <el-form-item
-                label="Instructing Staff Name"
-                prop="instructingName"
-              >
+              <el-form-item label="Instructing Staff Name" prop="instructingName">
                 <el-input size="small" v-model="formData.instructingName" />
               </el-form-item>
 
-              <el-form-item
-                label="Instructing Staff Email"
-                prop="instructingEmail"
-              >
+              <el-form-item label="Instructing Staff Email" prop="instructingEmail">
                 <el-input size="small" v-model="formData.instructingEmail" />
               </el-form-item>
 
-              <h2
-                style="
-                  width: calc(90vw - 20px);
-                  margin: 40px 0 10px 0;
-                  border-bottom: 1px dashed #ccc;
-                  padding-bottom: 10px;
-                  font-size: 18px;
-                "
-              >
-                Self-created Instructing Department
-              </h2>
+              <h2 style="width: calc(90vw - 20px); margin: 40px 0 10px 0; border-bottom: 1px dashed #ccc; padding-bottom: 10px; font-size: 18px">Self-created Instructing Department</h2>
 
-              <el-form-item
-                label="New or Existing Self-created Instructing Department"
-              >
+              <el-form-item label="New or Existing Self-created Instructing Department">
                 <el-radio-group v-model="formData.selfInstructing">
-                  <el-radio
-                    label="Create a new Instructing Department"
-                  ></el-radio>
-                  <el-radio
-                    label="Select a self-created Instructing Department"
-                  ></el-radio>
+                  <el-radio label="Create a new Instructing Department"></el-radio>
+                  <el-radio label="Select a self-created Instructing Department"></el-radio>
                 </el-radio-group>
               </el-form-item>
 
               <el-form-item label="New Self-created Instructing Department">
-                <el-input size="small" />
+                <el-input size="small" v-model="formData.instructingDepartment" />
               </el-form-item>
 
-              <el-form-item
-                label="Existing Self-created Instructing Department"
-              >
+              <el-form-item label="Existing Self-created Instructing Department">
                 <el-input size="small" v-model="formData.handingEid" />
               </el-form-item>
 
-              <el-form-item
-                label="New Self-created Instructing Department Code"
-              >
+              <el-form-item label="New Self-created Instructing Department Code">
                 <el-input size="small" v-model="formData.handiInstructing" />
               </el-form-item>
 
-              <el-form-item
-                label="Existing Self-created Instructing Department Code"
-              >
+              <el-form-item label="Existing Self-created Instructing Department Code">
                 <el-input size="small" v-model="formData.handingEmailCode" />
               </el-form-item>
 
@@ -176,32 +116,14 @@
               </el-form-item>
 
               <el-form-item label="Handling Staff eid">
-                <el-input size="small" v-model="formData.handingEid" />
+                <el-input size="small" v-model="formData.handingStaffEid" />
               </el-form-item>
 
               <el-form-item label="Descriptions ">
-                <el-input
-                  v-model="formData.descriptions"
-                  size="small"
-                  :rows="3"
-                  type="textarea"
-                  minlength="50"
-                  maxlength="200"
-                  show-word-limit
-                />
+                <el-input v-model="formData.descriptions" size="small" :rows="3" type="textarea" minlength="50" maxlength="200" show-word-limit />
               </el-form-item>
 
-              <h2
-                style="
-                  width: calc(90vw - 20px);
-                  margin: 40px 0 10px 0;
-                  border-bottom: 1px dashed #ccc;
-                  padding-bottom: 10px;
-                  font-size: 18px;
-                "
-              >
-                Related Case(s)
-              </h2>
+              <h2 style="width: calc(90vw - 20px); margin: 40px 0 10px 0; border-bottom: 1px dashed #ccc; padding-bottom: 10px; font-size: 18px">Related Case(s)</h2>
 
               <el-form-item label="Related Case Name">
                 <el-input size="small" v-model="formData.relatedName" />
@@ -214,95 +136,33 @@
                 <el-input size="small" v-model="formData.hidden" />
               </el-form-item>
 
-              <h2
-                style="
-                  width: calc(90vw - 20px);
-                  margin: 40px 0 10px 0;
-                  border-bottom: 1px dashed #ccc;
-                  padding-bottom: 10px;
-                  font-size: 18px;
-                "
-              >
-                Keywords(s)
-              </h2>
+              <h2 style="width: calc(90vw - 20px); margin: 40px 0 10px 0; border-bottom: 1px dashed #ccc; padding-bottom: 10px; font-size: 18px">Keywords(s)</h2>
 
               <el-form-item label="Keywords">
                 <el-input size="small" v-model="formData.keywords" />
               </el-form-item>
               <el-form-item label="File Upload:">
-                <el-upload
-                  class="upload-demo"
-                  :limit="3"
-                  action=""
-                  :auto-upload="false"
-                  :file-list="formData.fileList"
-                >
+                <el-upload class="upload-demo" :limit="3" action="" :auto-upload="false" :file-list="formData.fileList">
                   <el-button size="small" type="primary">Upload</el-button>
                 </el-upload>
               </el-form-item>
               <el-form-item label="Email Options" prop="emailOptions">
-                <el-select
-                  v-model="formData.emailOptions"
-                  size="small"
-                  filterable
-                  clearable
-                  style="width: 100%"
-                  placeholder="请选择"
-                >
-                  <el-option
-                    v-for="item in courseClassifyListCopy"
-                    :key="item.id"
-                    :label="item.name"
-                    :value="item.id"
-                  >
-                  </el-option>
+                <el-select v-model="formData.emailOptions" size="small" filterable clearable style="width: 100%" placeholder="请选择">
+                  <el-option v-for="item in courseClassifyListCopy" :key="item.id" :label="item.name" :value="item.id"></el-option>
                 </el-select>
               </el-form-item>
 
-              <h2
-                style="
-                  width: calc(90vw - 20px);
-                  margin: 40px 0 10px 0;
-                  border-bottom: 1px dashed #ccc;
-                  padding-bottom: 10px;
-                  font-size: 18px;
-                "
-              >
-                Update Case Status
-              </h2>
+              <h2 style="width: calc(90vw - 20px); margin: 40px 0 10px 0; border-bottom: 1px dashed #ccc; padding-bottom: 10px; font-size: 18px">Update Case Status</h2>
 
               <el-form-item label="Status" prop="status">
-                <el-select
-                  v-model="formData.status"
-                  size="small"
-                  filterable
-                  clearable
-                  style="width: 100%"
-                  placeholder="请选择"
-                >
-                  <el-option
-                    v-for="item in statusList"
-                    :key="item.id"
-                    :label="item.name"
-                    :value="item.id"
-                  >
-                  </el-option>
+                <el-select v-model="formData.status" size="small" filterable clearable style="width: 100%" placeholder="请选择">
+                  <el-option v-for="item in statusList" :key="item.id" :label="item.name" :value="item.id"></el-option>
                 </el-select>
               </el-form-item>
 
-              <h2
-                style="
-                  width: calc(90vw - 20px);
-                  margin: 40px 0 10px 0;
-                  border-bottom: 1px dashed #ccc;
-                  padding-bottom: 10px;
-                  font-size: 18px;
-                "
-              >
-                Hidden Section
-              </h2>
+              <h2 style="width: calc(90vw - 20px); margin: 40px 0 10px 0; border-bottom: 1px dashed #ccc; padding-bottom: 10px; font-size: 18px">Hidden Section</h2>
 
-              <el-form-item label="Case Type_Hidden" prop="caseHidden">
+              <el-form-item label="Case Type_Hidden" prop="caseHiddenType">
                 <el-input size="small" v-model="formData.caseHiddenType" />
               </el-form-item>
 
@@ -314,13 +174,8 @@
                 <el-input size="small" v-model="formData.instructingNormal" />
               </el-form-item>
 
-              <el-form-item
-                label="Instructing Department Type SelfCreate Hidden"
-              >
-                <el-input
-                  size="small"
-                  v-model="formData.instructingSelfCreate"
-                />
+              <el-form-item label="Instructing Department Type SelfCreate Hidden">
+                <el-input size="small" v-model="formData.instructingSelfCreate" />
               </el-form-item>
 
               <el-form-item label="Instructing Department Type Check Existed">
@@ -328,16 +183,11 @@
               </el-form-item>
 
               <el-form-item label="Self-created Instructing Department">
-                <el-checkbox
-                  >Register a Case with Self-created Instructing
-                  Department</el-checkbox
-                >
+                <el-checkbox v-model="formData.selfCreateCheck">Register a Case with Self-created Instructing Department</el-checkbox>
               </el-form-item>
 
               <el-form-item>
-                <el-button class="submit-btn" size="small" type="primary"
-                  >提交</el-button
-                >
+                <el-button class="submit-btn" size="small" type="primary" @click="handleSubmit" :loading="loading">提交</el-button>
               </el-form-item>
             </el-form>
           </div>
@@ -350,6 +200,7 @@
 
 <script>
 import Quill from '../components/Quill'
+import { $http } from '@/http'
 
 const courseClassifyListCopy = [
   { id: 1, name: 'To be sent by system' },
@@ -370,45 +221,58 @@ export default {
     return {
       courseClassifyListCopy,
       statusList,
+      loading: false,
       formData: {
         content: '',
         status: null,
-        fileList: []
+        fileList: [],
       },
       rules: {
-        caseName: [
-          { required: true, message: '值是必需的。', trigger: 'blur' },
-        ],
-        caseHidden: [
-          { required: true, message: '值是必需的。', trigger: 'blur' },
-        ],
-        caseDisplay: [
-          { required: true, message: '值是必需的。', trigger: 'blur' },
-        ],
-        instructingName: [
-          { required: true, message: '值是必需的。', trigger: 'blur' },
-        ],
-        instructingEmail: [
-          { required: true, message: '值是必需的。', trigger: 'blur' },
-        ],
-        lcoStaff: [
-          { required: true, message: '值是必需的。', trigger: 'blur' },
-        ],
-        instructingName: [
-          { required: true, message: '值是必需的。', trigger: 'blur' },
-        ],
+        caseName: [{ required: true, message: '值是必需的。', trigger: 'blur' }],
+        caseHiddenType: [{ required: true, message: '值是必需的。', trigger: 'blur' }],
+        caseDisplay: [{ required: true, message: '值是必需的。', trigger: 'blur' }],
+        instructingName: [{ required: true, message: '值是必需的。', trigger: 'blur' }],
+        instructingEmail: [{ required: true, message: '值是必需的。', trigger: 'blur' }],
+        lcoStaff: [{ required: true, message: '值是必需的。', trigger: 'blur' }],
+        instructingName: [{ required: true, message: '值是必需的。', trigger: 'blur' }],
 
         status: [{ required: true, message: '请选择', trigger: 'change' }],
-        emailOptions: [
-          { required: true, message: '请选择', trigger: 'change' },
-        ],
+        emailOptions: [{ required: true, message: '请选择', trigger: 'change' }],
       },
     }
   },
   mounted() {},
   methods: {
-    quillEditorChange(val) {
-      console.log('val', val)
+    quillEditorChange(data) {
+      this.formData.content = data.html
+    },
+    handleSubmit() {
+      this.$refs.formDataRef.validate(async valid => {
+        if (valid) {
+          this.loading = true
+          const params = {
+            data: this.formData,
+            packageName: 'Workflow 9',
+          }
+          const res = await $http(params)
+          if (res) {
+            this.loading = false
+            this.$message.success('提交成功')
+            this.resetForm()
+          }
+        }
+      })
+    },
+    resetForm() {
+      this.$refs.formDataRef.resetFields()
+      this.formData = {
+        name: '',
+        instructingName: '',
+        status: '',
+        emailOptions: '',
+        content: '',
+        selfCreateCheck: false,
+      }
     },
   },
 }
