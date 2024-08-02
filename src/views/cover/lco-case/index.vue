@@ -13,39 +13,40 @@
               :rules="rules"
               ref="ruleForm"
               class="baseinfo-form"
-              label-width="140px"
+              label-position="left"
+              label-width="170px"
             >
-              <el-form-item label="Type" prop="type">
-                <el-checkbox-group v-model="ruleForm.type">
+              <el-form-item label="Type" prop="Type">
+                <el-checkbox-group v-model="ruleForm.Type">
                   <el-checkbox label="Coversheet" />
                   <el-checkbox label="Box Label" />
                 </el-checkbox-group>
               </el-form-item>
-              <el-form-item label="Case Name:" prop="caseName">
+              <el-form-item label="Case Name:" prop="Case Name">
                 <el-input
                   size="small"
                   maxlength="50"
                   placeholder="请输入"
                   auto-complete="off"
-                  v-model="ruleForm.caseName"
+                  v-model="ruleForm['Case Name']"
                 />
               </el-form-item>
-              <el-form-item label="Case Number:" prop="caseNumber">
+              <el-form-item label="Case Number:" prop="Case Number">
                 <el-input
                   size="small"
                   maxlength="50"
                   placeholder="请输入"
                   auto-complete="off"
-                  v-model="ruleForm.caseNumber"
+                  v-model="ruleForm['Case Number']"
                 />
               </el-form-item>
-              <el-form-item label="LCO Handling Staff:">
+              <el-form-item label="LCO Handling Staff:" prop="LCO Handling Staff">
                 <el-input
                   size="small"
                   maxlength="50"
                   placeholder="请输入"
                   auto-complete="off"
-                  v-model="ruleForm.lcoDesc"
+                  v-model="ruleForm['LCO Handling Staff']"
                 />
               </el-form-item>
             </el-form>
@@ -70,21 +71,23 @@ export default {
   name: "UpdatePriority",
   data: () => ({
     ruleForm: {
-      type: [],
-      caseName: "",
-      caseNumber: "",
-      lcoDesc: "",
+      Type: [],
+      "Case Name": "",
+      "Case Number": "",
+      "LCO Handling Staff": "",
     },
     rules: {
-      type: [
+      Type: [
         {
           required: true,
           message: "值是必需的",
           trigger: "change",
         },
       ],
-      caseName: [{ required: true, message: "值是必需的", trigger: "change" }],
-      caseNumber: [
+      "Case Name": [
+        { required: true, message: "值是必需的", trigger: "change" },
+      ],
+      "Case Number": [
         { required: true, message: "值是必需的", trigger: "change" },
       ],
     },
@@ -95,20 +98,25 @@ export default {
     handleSubmit() {
       this.$refs["ruleForm"].validate(async (valid) => {
         if (valid) {
-        
-          const tag = await $http({
+          const { status, ok } = await $http({
             data: this.ruleForm,
             packageName: "Workflow 1",
           });
-          console.log(tag);
           this.loading = true;
-          await new Promise((resolve) => setTimeout(resolve, 1500))
-          this.loading = false;
+          if (ok) {
+            this.loading = false;
+            this.$message({
+              message: `提交成功，状态码：${status}`,
+              type: "success",
+            });
+            await new Promise((resolve) => setTimeout(resolve, 500));
+            this.$refs["ruleForm"].resetFields();
+            return;
+          }
           this.$message({
-            message: "提交成功",
-            type: "success",
+            message: `提交失败，请求接口异常,状态码：${status}`,
+            type: "error",
           });
-          // window.location.reload();
         }
       });
     },
