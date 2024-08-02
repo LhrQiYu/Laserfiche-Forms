@@ -1,7 +1,6 @@
 export const $http = async ({ data = {}, packageName = '' }) => {
-    const result = Object.entries(data).reduce((current, pre) => {
-        current = [...current, { Name: pre.at(0), value: pre.at(-1) }]
-        return current
+    const result = Object.entries(data).reduce((current, [Name, value]) => {
+        return [...current, {Name,value}]
     }, [])
     const staticJSON = {
         "Initiator": {
@@ -23,7 +22,13 @@ export const $http = async ({ data = {}, packageName = '' }) => {
         referrer: 'no-referrer',
         cache: 'no-cache',
     }
-    const { status = 400, ok = false } = await fetch('/api/instances', options)
-    return (status === 200 && ok);
-    // const result = await promiser.text()
+    try {
+        const { status = 400, ok = false } = await fetch('/api/instances', options)
+        return {
+            status,
+            ok: (status === 200 && ok)
+        };
+    } catch (error) {
+        throw new Error(error);
+    }
 }
