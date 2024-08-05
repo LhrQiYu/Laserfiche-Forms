@@ -11,6 +11,7 @@
           <div class="baseinfo-card">
             <el-form
               :model="formData"
+              ref="ruleForm"
               :rules="rules"
               class="baseinfo-form"
               label-width="220px"
@@ -278,7 +279,7 @@
               </el-form-item>
 
               <el-form-item label="Self-created Instructing Department">
-                <el-checkbox
+                <el-checkbox v-model="formData.instructingAnother"
                   >Register a Case with Self-created Instructing
                   Department</el-checkbox
                 >
@@ -293,7 +294,7 @@
                   class="submit-btn"
                   size="small"
                   type="primary"
-                  @submit="handleSubmit"
+                  @click="handleSubmit"
                   >提交</el-button
                 >
               </el-form-item>
@@ -308,7 +309,7 @@
 
 <script>
 import Quill from "../components/Quill";
-
+import { $http } from "@/http";
 const courseClassifyListCopy = [
   { id: 1, name: "To be sent by system" },
   { id: 2, name: "To be sent manually" },
@@ -322,10 +323,44 @@ export default {
     return {
       courseClassifyListCopy,
       formData: {
-        content: "",
-        status: null,
-        signature: "签名",
+        workflowEmailId: "",
+        number: "",
+        caseName: "",
+        trademarkCase: "",
+        department: "",
+        departmentCode: "",
+        radio: "",
+        tsOrgn: "",
+        deptCode: "",
+        subCase: "",
+        masterCaseNumber: "",
+        masterCaseName: "",
+        caseDescription: "",
+        instructingName: "",
+        instructingEmail: "",
+        selfInstructing: "",
+        createInstryting: "",
+        createInstryingCode: "",
+        existingCode: "",
+        existingDepartment: "",
+        lcoStaff: "",
+        handingEid: "",
+        handingEmail: "",
+        descriptions: "",
+        relatedName: "",
+        relatedNumber: "",
+        relatedHidden: "",
+        keywords: "",
         fileList: [],
+        lcoEmail: "",
+        caseHidden: "",
+        caseDisplay: "",
+        instructingNormal: "",
+        instructingSelfCreate: "",
+        instructingCheck: "",
+        instructingAnother: "",
+        signature: "",
+        
       },
       rules: {
         caseName: [
@@ -368,7 +403,32 @@ export default {
     quillEditorChange(val) {
       console.log("val", val);
     },
-    handleSubmit() {},
+    async handleSubmit() {
+      console.log(111);
+      this.$refs["ruleForm"].validate(async (valid) => {
+        if (valid) {
+          const { status, ok } = await $http({
+            data: this.formData,
+            packageName: "Workflow 1",
+          });
+          this.loading = true;
+          if (ok) {
+            this.loading = false;
+            this.$message({
+              message: `提交成功，状态码：${status}`,
+              type: "success",
+            });
+            await new Promise((resolve) => setTimeout(resolve, 500));
+            this.$refs["ruleForm"].resetFields();
+            return;
+          }
+          this.$message({
+            message: `提交失败，请求接口异常,状态码：${status}`,
+            type: "error",
+          });
+        }
+      });
+    },
   },
 };
 </script>
