@@ -66,7 +66,7 @@
 </template>
 
 <script>
-import { $http } from "@/http";
+import { $http } from "@/http";``
 export default {
   name: "UpdatePriority",
   data: () => ({
@@ -93,7 +93,6 @@ export default {
     },
     loading: false,
   }),
-  async created() {},
   methods: {
     handleSubmit() {
       this.$refs["ruleForm"].validate(async (valid) => {

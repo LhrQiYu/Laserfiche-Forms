@@ -10,15 +10,20 @@
             <el-form
               style="font-weight: 700"
               :model="ruleForm"
+              ref="ruleForm"
               class="baseinfo-form"
               label-width="140px"
             >
               <el-form-item label="File Upload:">
                 <el-upload
                   class="upload-demo"
-                  :limit="3"
+                  :limit="1"
+                  accept=".xlsx"
                   action=""
                   :auto-upload="false"
+                  :on-exceed="handlExceed"
+                  :on-change="handleUploadChange"
+                  :on-remove="handleRemove"
                   :file-list="ruleForm.fileList"
                 >
                   <el-button size="small" type="primary">Upload</el-button>
@@ -50,6 +55,7 @@
 </template>
 
 <script>
+import { $http } from "@/http";
 export default {
   name: "UpdatePriority",
   data: () => ({
@@ -61,12 +67,36 @@ export default {
   }),
   methods: {
     async handleSubmit() {
+      const { status, ok } = await $http({
+        data: this.ruleForm,
+        packageName: "Workflow 1",
+      });
       this.loading = true;
-      await new Promise((resolve) => setTimeout(resolve, 1500));
-      this.loading = false;
+      if (ok) {
+        this.loading = false;
+        this.$message({
+          message: `提交成功，状态码：${status}`,
+          type: "success",
+        });
+        await new Promise((resolve) => setTimeout(resolve, 500));
+        this.$refs["ruleForm"].resetFields();
+        return;
+      }
       this.$message({
-        message: "提交成功",
-        type: "success",
+        message: `提交失败，请求接口异常,状态码：${status}`,
+        type: "error",
+      });
+    },
+    handleUploadChange(_, fileList) {
+      this.ruleForm.fileList = fileList
+    },
+    handleRemove(_,fileList) {
+      this.ruleForm.fileList = fileList
+    },
+    handlExceed() {
+      this.$message({
+        message: "文件超出最大数量",
+        type: "error",
       });
     },
   },
