@@ -285,6 +285,7 @@ export default {
         status: '',
         emailOptions: '',
         content: '',
+        selfCreateCheck: false,
       }
     },
   },

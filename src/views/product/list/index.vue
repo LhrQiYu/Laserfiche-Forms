@@ -187,7 +187,7 @@
               </el-form-item>
 
               <el-form-item label="Self-created Instructing Department">
-                <el-checkbox>Register a Case with Self-created Instructing Department</el-checkbox>
+                <el-checkbox v-model="formData.selfCreateCheck">Register a Case with Self-created Instructing Department</el-checkbox>
               </el-form-item>
 
               <el-form-item>
@@ -232,9 +232,6 @@ export default {
         instructingName: [{ required: true, message: '值是必需的。', trigger: 'blur' }],
         instructingEmail: [{ required: true, message: '值是必需的。', trigger: 'blur' }],
         lcoStaff: [{ required: true, message: '值是必需的。', trigger: 'blur' }],
-        instructingName: [{ required: true, message: '值是必需的。', trigger: 'blur' }],
-
-        status: [{ required: true, message: '请选择', trigger: 'change' }],
         emailOptions: [{ required: true, message: '请选择', trigger: 'change' }],
       },
     }
@@ -271,6 +268,7 @@ export default {
         status: '',
         emailOptions: '',
         content: '',
+        selfCreateCheck: false,
       }
     },
   },
