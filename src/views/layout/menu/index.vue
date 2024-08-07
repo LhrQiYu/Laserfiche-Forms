@@ -68,6 +68,10 @@
               <i class="el-icon-s-flag"></i>
               <span slot="title">LCO Case Filing</span>
             </el-menu-item>
+            <el-menu-item index="/cover-sheets/lf-test">
+              <i class="el-icon-s-flag"></i>
+              <span slot="title">Lf Test</span>
+            </el-menu-item>
           </el-menu-item-group>
         </el-submenu>
       </el-menu>

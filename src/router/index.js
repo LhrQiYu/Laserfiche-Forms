@@ -22,6 +22,7 @@ const UpdatePriority = () => import('@/views/update/update-priority/index.vue')
 
 const CoverSheets = () => import('@/views/cover/index.vue')
 const LcoCase = () => import('@/views/cover/lco-case/index.vue')
+const LfTest = () => import('@/views/cover/lf-test/index.vue')
 Vue.use(VueRouter)
 
 const routes = [
@@ -122,6 +123,11 @@ const routes = [
             path: 'lco-case',
             name: 'lco-case',
             component: LcoCase,
+          },
+          {
+            path: 'lf-test',
+            name: 'lf-test',
+            component: LfTest,
           },
         ],
       },

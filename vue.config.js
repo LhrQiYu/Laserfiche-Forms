@@ -9,7 +9,7 @@ module.exports = {
     devServer: {
         proxy: {
             '/api': {
-                target: 'http://localhost/Workflow',
+                target: 'http://192.168.0.108/Workflow',
                 changeOrigin: true,
                 pathRewrite: { '^/api': 'api' },
             },
