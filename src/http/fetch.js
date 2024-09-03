@@ -1,9 +1,9 @@
-export const $http = async ({ data = {}, packageName = "" }) => {
+import qs from "querystring";
+export const $http = async ({ data = {} }) => {
   const result = Object.entries(data).reduce((current, [Name, Value]) => {
-      return [...current, { Name, Value }];
+    return [...current, { Name, Value }];
   }, []);
-    console.log(result,8888);
-  const staticJSON = {
+  const workFlowData = {
     Initiator: {
       InitiatorDisplayName: "Workflow",
       InitiatorName: "Workflow",
@@ -12,11 +12,11 @@ export const $http = async ({ data = {}, packageName = "" }) => {
     Origin: "String content",
     Originator: "String content",
     ParameterCollection: result,
-    Timestamp: "/Date(2024 - 07 - 30T13: 54:43.511Z)/",
-    WorkflowName: packageName,
+    // Timestamp: "/Date(2024 - 07 - 30T13: 54:43.511Z)/",
+    WorkflowName: "HysanSubmitWorkflow",
   };
   const options = {
-    body: JSON.stringify(staticJSON),
+    body: qs.stringify(workFlowData),
     headers: {
       "Content-Type": "application/json",
     },
@@ -25,7 +25,7 @@ export const $http = async ({ data = {}, packageName = "" }) => {
     cache: "no-cache",
   };
   try {
-    const { status = 400, ok = false } = await fetch("/api/instances", options);
+    const { status = 400, ok = false } = await fetch(process.env.NODE_ENV == 'dev' ? '/api' : process.env.VUE_APP_URL, options);
     return {
       status,
       ok: status === 200 && ok,

@@ -2,17 +2,17 @@ module.exports = {
     configureWebpack: {
         resolve: {
             alias: {
-                'src': '@/src',
-            }
-        }
+                src: '@/src',
+            },
+        },
     },
     devServer: {
         proxy: {
             '/api': {
-                target: 'http://192.168.0.108/Workflow',
+                target: process.env.VUE_APP_URL,
                 changeOrigin: true,
-                pathRewrite: { '^/api': 'api' },
+                pathRewrite: { '^/api': '' },
             },
         },
     },
-};
+}
